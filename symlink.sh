@@ -53,6 +53,8 @@ echo "### Linking configuration files ###"
 link_config "config/hypr" "$HOME/.config/hypr" || echo "Failed to link hypr config."
 link_config "config/kitty" "$HOME/.config/kitty" || echo "Failed to link kitty config."
 link_config "config/waybar" "$HOME/.config/waybar" || echo "Failed to link waybar config."
+link_config "config/fcitx5/config" "$HOME/.config/fcitx5/config" || echo "Failed to link fcitx5 config."
+link_config "config/fcitx5/profile" "$HOME/.config/fcitx5/profile" || echo "Failed to link fcitx5 profile."
 
 link_config "etc/pacman.conf" "/etc/pacman.conf" true || echo "Failed to link pacman.conf."
 
