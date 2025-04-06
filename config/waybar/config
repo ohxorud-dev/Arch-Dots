@@ -1,0 +1,32 @@
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  ],
+"layer": "top", 
+"position": "top", 
+"exclusive": true,
+"passthrough": false,
+"gtk-layer-shell": true,
+"margin-left": 6,
+"margin-right": 6,
+"margin-top": 2,
+
+"modules-left": [
+	"hyprland/workspaces#rw",
+	"tray",
+	],
+    
+"modules-center": [
+	"clock",
+	"group/notify",
+	],
+    
+"modules-right": [
+	"hyprland/window",
+	"temperature",
+	"pulseaudio",
+	"battery",
+	"power-profiles-daemon",
+	],
+}
+

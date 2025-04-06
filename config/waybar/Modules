@@ -1,0 +1,287 @@
+{
+
+"temperature": {
+	"interval": 10,
+	"tooltip": true,
+	"hwmon-path": [
+		"/sys/class/hwmon/hwmon1/temp1_input",
+		"/sys/class/thermal/thermal_zone0/temp"
+	],
+	//"thermal-zone": 0,
+	"critical-threshold": 82,
+	"format-critical": "{temperatureC}°C {icon}",
+	"format": "{temperatureC}°C {icon}",
+	"format-icons": [
+		"󰈸"
+	],
+},
+
+"group/audio": {
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "pulseaudio",
+		"transition-left-to-right": true
+        },
+	"modules": [
+		"pulseaudio",
+		"pulseaudio#microphone",
+	]
+},
+
+"backlight": {
+	"interval": 2,
+	"align": 0,
+	"rotate": 0,
+	//"format": "{icon} {percent}%",
+	"format-icons": [
+		" ",
+		" ",
+		" ",
+		"󰃝 ",
+		"󰃞 ",
+		"󰃟 ",
+		"󰃠 "
+	],
+	"format": "{icon}",
+	//"format-icons": ["","","","","","","","","","","","","","",""],
+	"tooltip-format": "backlight {percent}%",
+	"icon-size": 10,
+	"on-click": "",
+	"on-click-middle": "",
+	"on-click-right": "",
+	"on-update": "",
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Brightness.sh --inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Brightness.sh --dec",
+	"smooth-scrolling-threshold": 1,
+},
+
+"backlight#2": {
+  "device": "intel_backlight",
+  "format": "{icon} {percent}%",
+  "format-icons": ["", ""]
+},
+
+"battery": {
+	//"interval": 5,
+	"align": 0,
+	"rotate": 0,
+	//"bat": "BAT1",
+	//"adapter": "ACAD",
+	"full-at": 100,
+	"design-capacity": false,
+	"states": {
+		"good": 95,
+		"warning": 30,
+		"critical": 15
+	},
+	"format": "{icon} {capacity}%",
+	"format-charging": " {capacity}%",
+	"format-plugged": "󱘖 {capacity}%",
+	"format-alt-click": "click",
+	"format-full": "{icon} Full",
+	"format-alt": "{icon} {time}",
+	"format-icons": [
+		"󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+	],
+	"format-time": "{H}h {M}min",
+	"tooltip": true,
+	"tooltip-format": "{timeTo} {power}w",
+	"on-click-middle": "$HOME/.config/hypr/scripts/ChangeBlur.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/Wlogout.sh",
+},
+
+"clock": {
+    "format": "  {:%I:%M %p}",
+},
+
+
+"cpu": {
+	"format": "{usage}% 󰍛",
+	"interval": 1,
+	"min-length": 5,
+	"format-alt-click": "click",
+	"format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
+	"format-icons": [
+		"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"
+	],
+	"on-click-right": "gnome-system-monitor",
+},
+
+"hyprland/window": {
+	"format": "{}",
+	"max-length": 25,
+	"separate-outputs": true,
+	"offscreen-css": true,
+	"offscreen-css-text": "(inactive)",
+	"rewrite": {
+		"(.*) — Mozilla Firefox": " $1",
+		"(.*) - fish": "> [$1]",
+		"(.*) - zsh": "> [$1]",
+		"(.*) - $term": "> [$1]",
+	},
+},
+
+"idle_inhibitor": {
+	"tooltip": true,
+	"tooltip-format-activated": "Idle_inhibitor active",
+	"tooltip-format-deactivated": "Idle_inhibitor not active",
+	"format": "{icon}",
+	"format-icons": {
+		"activated": " ",
+		"deactivated": " ",
+	}
+},
+
+"memory": {
+	"interval": 10,
+	"format": "{used:0.1f}G 󰾆",
+	"format-alt": "{percentage}% 󰾆",
+	"format-alt-click": "click",
+	"tooltip": true,
+	"tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
+	"on-click-right": "kitty --title btop sh -c 'btop'"
+},
+
+"power-profiles-daemon": {
+  "format": "{icon} ",
+  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+  "tooltip": true,
+  "format-icons": {
+    "default": "",
+    "performance": "",
+    "balanced": "",
+    "power-saver": ""
+  }
+},
+
+"pulseaudio": {
+	"format": "{icon} {volume}%",
+	"format-bluetooth": "{icon} 󰂰 {volume}%",
+	"format-muted": "󰖁",
+	"format-icons": {
+		"headphone": "",
+		"hands-free": "",
+		"headset": "",
+		"phone": "",
+		"portable": "",
+		"car": "",
+		"default": [
+			"", "", "󰕾",  ""
+		],
+		"ignored-sinks": [
+			"Easy Effects Sink"
+		],
+	},
+	"scroll-step": 5.0,
+	"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
+	"on-click-right": "pavucontrol -t 3",
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
+	"tooltip-format": "{icon} {desc} | {volume}%",
+	"smooth-scrolling-threshold": 1,
+},
+
+"tray": {
+	"icon-size": 20,
+	"spacing": 4,
+},
+
+"hyprland/workspaces#rw": {
+	"disable-scroll": true,
+	"all-outputs": true,
+	"warp-on-scroll": false,
+	"sort-by-number": true,
+	"show-special": false,
+	"on-click": "activate",
+	"on-scroll-up": "hyprctl dispatch workspace e+1",
+	"on-scroll-down": "hyprctl dispatch workspace e-1",
+	"persistent-workspaces": {
+		"*": 5
+	  },
+	"format": "{icon} {windows}",
+	"format-window-separator": " ",
+	"window-rewrite-default": " ",
+	"window-rewrite": {		
+		"title<.*amazon.*>": " ",
+		"title<.*reddit.*>": " ",
+
+		"class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>": " ",
+		"class<zen>": "󰰷 ",
+		"class<waterfox|waterfox-bin>": " ",
+		"class<microsoft-edge>": " ",
+		"class<Chromium|Thorium|[Cc]hrome>": " ",
+		"class<brave-browser>": "🦁 ",
+		"class<tor browser>": " ",
+		"class<firefox-developer-edition>": "🦊 ",
+
+		"class<kitty|konsole>": " ",
+		"class<kitty-dropterm>": " ",
+		"class<com.mitchellh.ghostty>": " ",
+		"class<org.wezfurlong.wezterm>": " ",
+
+		"class<[Tt]hunderbird|[Tt]hunderbird-esr>": " ",
+		"class<eu.betterbird.Betterbird>": " ",
+		"title<.*gmail.*>": "󰊫 ",
+
+		"class<[Tt]elegram-desktop|org.telegram.desktop|io.github.tdesktop_x64.TDesktop>": " ",
+		"class<discord|[Ww]ebcord|Vesktop>": " ",
+		"title<.*whatsapp.*>": " ",
+    "title<.*zapzap.*>": " ",
+		"title<.*messenger.*>": " ",
+		"title<.*facebook.*>": " ",
+		"title<.*reddit.*>": " ",
+
+
+		"title<.*ChatGPT.*>": "󰚩 ",
+		"title<.*deepseek.*>": "󰚩 ",
+		"title<.*qwen.*>": "󰚩 ",
+		"class<subl>": "󰅳 ",
+		"class<slack>": " ",
+
+		"class<mpv>": " ",
+		"class<celluloid|Zoom>": " ",
+		"class<Cider>": "󰎆 ",
+		"title<.*Picture-in-Picture.*>": " ",
+		"title<.*youtube.*>": " ",
+		"class<vlc>": "󰕼 ",
+		"title<.*cmus.*>": " ",
+		"class<[Ss]potify>": " ",
+
+		"class<virt-manager>": " ",
+		"class<.virt-manager-wrapped>": " ",
+		"class<virtualbox manager>": "💽 ",
+		"title<virtualbox>": "💽 ",
+		"class<remmina>": "🖥️ ",
+
+		"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "󰨞 ",
+    "class<dev.zed.Zed>": "󰵁",
+		"class<codeblocks>": "󰅩 ",
+		"title<.*github.*>": " ",
+		"class<mousepad>": " ",
+		"class<libreoffice-writer>": " ",
+		"class<libreoffice-startcenter>": "󰏆 ",
+		"class<libreoffice-calc>": " ",
+		"title<.*nvim ~.*>": " ",
+		"title<.*vim.*>": " ",
+		"title<.*nvim.*>": " ",
+		"title<.*figma.*>": " ",
+		"title<.*jira.*>": " ",
+		"class<jetbrains-idea>": " ",
+
+		"class<obs|com.obsproject.Studio>": " ",
+
+		"class<polkit-gnome-authentication-agent-1>": "󰒃 ",
+		"class<nwg-look>": " ",
+		"class<[Pp]avucontrol|org.pulseaudio.pavucontrol>": "󱡫 ",
+		"class<steam>": " ",
+		"class<thunar|nemo>": "󰝰 ",	
+    "class<Gparted>":"",
+		"class<gimp>": " ",
+		"class<emulator>": "📱 ",
+		"class<android-studio>": " ",
+		}
+}
+
+}
+
+
