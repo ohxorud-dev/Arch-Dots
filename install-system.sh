@@ -36,8 +36,8 @@ passwd ohxorud
 su ohxorud
 
 echo "### Deploying GRUB ###"
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch
-grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "### Updating full system ###"
 sudo pacman -Syyu
