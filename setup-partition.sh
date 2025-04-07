@@ -8,6 +8,10 @@ if [ "$#" -ne 2 ]; then
   exit
 fi
 
+umount -R /mnt
+umount $1
+umount $2
+
 mkfs.btrfs --force $1
 mkfs.fat -F32 $2
 mount $1 /mnt
