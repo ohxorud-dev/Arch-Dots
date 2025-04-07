@@ -2,12 +2,14 @@
 
 set -e
 
-if [ "$#" -ne 1 ]; then
-  echo "Partition name not specified"
+if [ "$#" -ne 2 ]; then
+  echo "Partition names are not specified"
+  echo "Usage: ./setup-partition.sh <BTRFS Partition> <EFI Partition>"
   exit
 fi
 
 mkfs.btrfs --force $1
+mkfs.fat -F32 $2
 mount $1 /mnt
 
 btrfs subvolume create /mnt/@
@@ -33,7 +35,7 @@ mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@opt --mkdir $1 /mnt
 mount -o rw,noatime,nodatacow,ssd,space_cache=v2,subvol=@vms --mkdir $1 /mnt/var/lib/libvirt/images
 
 mkdir /mnt/efi
-mount /dev/nvme0n1p1 /mnt/efi
+mount $2 /mnt/efi
 
 pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
