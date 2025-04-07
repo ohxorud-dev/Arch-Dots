@@ -47,7 +47,7 @@ echo "Server = https://mirror.morgan.kr/archlinux/\$repo/os/\$arch" > /etc/pacma
 pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
 
-cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-system.sh /mnt/tmp
-arch-chroot /mnt bash /tmp/install-system.sh
+cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-system.sh /
+arch-chroot /mnt bash /install-system.sh
 
 reboot
