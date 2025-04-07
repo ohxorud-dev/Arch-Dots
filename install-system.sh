@@ -52,8 +52,11 @@ sudo sed -i 's#^ExecStart=.*#ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift
 sudo systemctl daemon-reload
 sudo systemctl enable grub-btrfsd
 
+echo "### Cloning repo into home directory ###"
+git clone https://github.com/ohxorud-dev/Arch-Dots /home/ohxorud/.dotfiles
+
 echo "### Symlinking ###"
-./symlink.sh
+/home/ohxorud/.dotfiles/symlink.sh
 
 echo "### Installing display graphics for nvidia and intel GPU ###"
 yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
