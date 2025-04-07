@@ -37,6 +37,9 @@ mount -o rw,noatime,nodatacow,ssd,space_cache=v2,subvol=@vms --mkdir $1 /mnt/var
 mkdir /mnt/efi
 mount $2 /mnt/efi
 
+rm -f /etc/pacman.d/mirrorlist
+echo "Server = https://mirror.morgan.kr/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+
 pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
 
