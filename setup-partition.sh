@@ -7,29 +7,32 @@ if [ "$#" -ne 1 ]; then
   exit
 fi
 
-# Setup BTRFS partition
 mkfs.btrfs --force $1
 mount $1 /mnt
 
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@swap
-btrfs subvolume create /mnt/@boot
 btrfs subvolume create /mnt/@cache
 btrfs subvolume create /mnt/@tmp
 btrfs subvolume create /mnt/@log
 btrfs subvolume create /mnt/@snapshots
+btrfs subvolume create /mnt/@swap
+btrfs subvolume create /mnt/@opt
+btrfs subvolume create /mnt/@vms
 
 umount /mnt
 
-mount -o compress=zstd,subvol=@ $1 /mnt
-mount -o compress=zstd,subvol=@home --mkdir $1 /mnt/home
-mount -o compress=zstd,subvol=@swap --mkdir $1 /mnt/swap
-mount -o compress=zstd,subvol=@boot --mkdir $1 /mnt/boot
-mount -o compress=zstd,subvol=@cache --mkdir $1 /mnt/var/cache
-mount -o compress=zstd,subvol=@tmp --mkdir $1 /mnt/var/tmp
-mount -o compress=zstd,subvol=@log --mkdir $1 /mnt/var/log
-mount -o compress=zstd,subvol=@snapshots --mkdir $1 /mnt/.snapshots
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@ $1 /mnt
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@home --mkdir $1 /mnt/home
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@swap --mkdir $1 /mnt/swap
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@cache --mkdir $1 /mnt/var/cache
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@tmp --mkdir $1 /mnt/var/tmp
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@log --mkdir $1 /mnt/var/log
+mount -o rw,noatime,compress=zstd,ssd,space_cache=v2,subvol=@snapshots --mkdir $1 /mnt/.snapshots
+mount -o rw,noatime,nodatacow,nocompress,subvol=@swap --mkdir $1 /mnt/swap
+mount -o rw,noatime,compress=zstd,ssd,space_cache,v2,subvol=@opt --mkdir $1 /mnt/opt
+mount -o rw,noatime,nodatacow,ssd,space_cache=v2,subvol=@vms --mkdir $1 /mnt/var/lib/libvirt/images
 
 mkdir /mnt/efi
 mount /dev/nvme0n1p1 /mnt/efi
