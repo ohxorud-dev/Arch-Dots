@@ -8,9 +8,9 @@ if [ "$#" -ne 2 ]; then
   exit
 fi
 
-umount -R /mnt
-umount $1
-umount $2
+umount -R /mnt || echo "/mnt is not mounted"
+umount $1 || echo "$1 is not mounted"
+umount $2 || echo "$2 is not mounted"
 
 mkfs.btrfs --force $1
 mkfs.fat -F32 $2
