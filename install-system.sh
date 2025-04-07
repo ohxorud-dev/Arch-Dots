@@ -31,24 +31,36 @@ echo "### Setting root password ###"
 passwd root
 
 echo "### Adding new user ###"
-sudo usermod -aG wheel ohxorud
+sudo useradd -mG wheel ohxorud || echo "User already exist, using existing user"
 passwd ohxorud
-su ohxorud
 
 echo "### Deploying GRUB ###"
-sudo grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "### Updating full system ###"
-sudo pacman -Syyu
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch
+grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "### Installing yay ###"
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd .. && rm -rf yay
-
-echo "### Installing packages ###"
-yay -S --noconfirm --needed hyprland waybar hyprpaper kitty brightnessctl pavucontrol polkit-kde-agent qt5-wayland qt6-wayland xdg-desktop-portal-hyprland wl-clipboard network-manager-applet fcitx5 fcitx5-qt fcitx5-gtk fcitx5-hangul fcitx5-configtool man openssh pipewire pipewire-jack pipewire-alsa pipewire-pulse inotify-tools zen-browser-bin gitkraken
+cd /tmp && pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && chown ohxorud:ohxorud -R yay && cd yay && sudo -u ohxorud makepkg -si && cd .. && rm -rf yay
 
 echo "### Enabling essential services ###"
-sudo systemctl enable NetworkManager
+systemctl enable NetworkManager
 
-exit
+echo "### Installing Additional packages ###"
+sudo -u ohxorud yay -S --noconfirm --needed hyprland waybar hyprpaper kitty brightnessctl pavucontrol polkit-kde-agent qt5-wayland qt6-wayland xdg-desktop-portal-hyprland wl-clipboard network-manager-applet fcitx5 fcitx5-qt fcitx5-gtk fcitx5-hangul fcitx5-configtool man openssh pipewire pipewire-jack pipewire-alsa pipewire-pulse inotify-tools zen-browser-bin gitkraken timeshift-auto sddm nerd-fonts ttf-fira-code fish rofi starship 
+
+echo "### Setting grub-btrfsd ###"
+sudo sed -i 's#^ExecStart=.*#ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto#' /usr/lib/systemd/system/grub-btrfsd.service
+sudo systemctl daemon-reload
+sudo systemctl enable grub-btrfsd
+
+echo "### Symlinking ###"
+./symlink.sh
+
+echo "### Installing display graphics for nvidia and intel GPU ###"
+yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
+
+echo "### Enabling SDDM ###"
+sudo systemctl enable sddm
+
+echo "### Changing Shell ###"
+chsh --shell /usr/bin/fish
+
