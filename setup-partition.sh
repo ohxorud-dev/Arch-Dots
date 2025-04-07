@@ -40,3 +40,5 @@ genfstab -U /mnt >>/mnt/etc/fstab
 
 cp -r "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)" /mnt/.dotfiles
 arch-chroot /mnt bash /.dotfiles/install-system.sh
+
+reboot
