@@ -38,7 +38,7 @@ mount /dev/nvme0n1p1 /mnt/efi
 pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
 
-cp -r "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)" /mnt/.dotfiles
-arch-chroot /mnt bash /.dotfiles/install-system.sh
+cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-system.sh /mnt/tmp
+arch-chroot /mnt bash /tmp/install-system.sh
 
 reboot
