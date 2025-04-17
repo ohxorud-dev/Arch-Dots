@@ -53,16 +53,16 @@ sudo systemctl daemon-reload
 sudo systemctl enable grub-btrfsd
 
 echo "### Cloning repo into home directory ###"
-git clone https://github.com/ohxorud-dev/Arch-Dots /home/ohxorud/.dotfiles
+sudo -u ohxorud git clone https://github.com/ohxorud-dev/Arch-Dots /home/ohxorud/.dotfiles
 
 echo "### Symlinking ###"
-/home/ohxorud/.dotfiles/symlink.sh
+sudo -u ohxorud /home/ohxorud/.dotfiles/symlink.sh
 
 echo "### Installing display graphics for nvidia and intel GPU ###"
-yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
+sudo -u ohxorud yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
 
 echo "### Enabling SDDM ###"
-sudo systemctl enable sddm
+systemctl enable sddm
 
 echo "### Changing Shell ###"
 chsh --shell /usr/bin/fish
