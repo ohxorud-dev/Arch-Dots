@@ -60,8 +60,6 @@ pacman -S --needed git base-devel
 sudo -u ohxorud git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u ohxorud makepkg -si
-cd /tmp
-rm -rf yay
 
 echo "### Installing Additional packages ###"
 sudo -u ohxorud yay -S --noconfirm --needed hyprland waybar hyprpaper kitty brightnessctl pavucontrol polkit-kde-agent qt5-wayland qt6-wayland xdg-desktop-portal-hyprland wl-clipboard network-manager-applet fcitx5 fcitx5-qt fcitx5-gtk fcitx5-hangul fcitx5-configtool man openssh pipewire pipewire-jack pipewire-alsa pipewire-pulse inotify-tools zen-browser-bin gitkraken timeshift-auto sddm nerd-fonts ttf-fira-code fish rofi starship 
@@ -86,3 +84,7 @@ sudo systemctl enable sddm
 
 echo "### Changing Shell ###"
 chsh --shell /usr/bin/fish
+
+echo "### Cleaning Up ###"
+rm -rf /install-system.sh
+rm -rf /tmp/yay
