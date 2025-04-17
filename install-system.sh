@@ -70,13 +70,13 @@ sudo systemctl daemon-reload
 sudo systemctl enable grub-btrfsd
 
 echo "### Cloning repo into home directory ###"
-sudo -u ohxorud git clone https://github.com/ohxorud-dev/Arch-Dots /home/ohxorud/.dotfiles
+sudo -u ohxorud sudo -u ohxorud git clone https://github.com/ohxorud-dev/Arch-Dots /home/ohxorud/.dotfiles
 
 echo "### Symlinking ###"
-sudo -u ohxorud /home/ohxorud/.dotfiles/symlink.sh
+sudo -u ohxorud sudo -u ohxorud /home/ohxorud/.dotfiles/symlink.sh
 
 echo "### Installing display graphics for nvidia and intel GPU ###"
-sudo -u ohxorud yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
+sudo -u ohxorud sudo -u ohxorud yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
 
 echo "### Enabling essential services ###"
 systemctl enable NetworkManager
