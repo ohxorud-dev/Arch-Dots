@@ -49,6 +49,7 @@ rm /mnt/etc/pacman.conf
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /etc
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /mnt/etc
 
+pacman -Sy --needed archlinux-keyring
 pacstrap -K /mnt base base-devel git linux linux-firmware linux-headers btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
 
