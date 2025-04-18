@@ -1,3 +1,8 @@
+//* ---- 💫 https://github.com/JaKooLit 💫 ---- *//
+/* Waybar Modules */
+
+/* NOTE: hyprland-workspaces, Custom Modules, Custom Vertical & Groups on a separate files */
+
 {
 
 "temperature": {
@@ -14,18 +19,7 @@
 	"format-icons": [
 		"󰈸"
 	],
-},
-
-"group/audio": {
-	"drawer": {
-		"transition-duration": 500,
-		"children-class": "pulseaudio",
-		"transition-left-to-right": true
-        },
-	"modules": [
-		"pulseaudio",
-		"pulseaudio#microphone",
-	]
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nvtop"
 },
 
 "backlight": {
@@ -90,10 +84,73 @@
 	"on-click-right": "$HOME/.config/hypr/scripts/Wlogout.sh",
 },
 
-"clock": {
-    "format": "  {:%I:%M %p}",
+"bluetooth": {
+	"format": " ",
+	"format-disabled": "󰂳",
+	"format-connected": "󰂱 {num_connections}",
+	"tooltip-format": " {device_alias}",
+	"tooltip-format-connected": "{device_enumerate}",
+	"tooltip-format-enumerate-connected": " {device_alias} 󰂄{device_battery_percentage}%",
+	"tooltip": true,
+	"on-click": "blueman-manager",
 },
 
+"clock": {
+	"interval": 1,
+    //"format": " {:%I:%M %p}", // AM PM format
+    "format": " {:%H:%M:%S}", // 24H
+	"format-alt": " {:%H:%M   %Y, %d %B, %A}",
+	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+	"calendar": {
+		"mode": "year",
+		"mode-mon-col": 3,
+		"weeks-pos": "right",
+		"on-scroll": 1,
+		"format": {
+			"months": "<span color='#ffead3'><b>{}</b></span>",
+			"days": "<span color='#ecc6d9'><b>{}</b></span>",
+			"weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+			"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+			"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+		}
+	}
+},
+
+"actions": {
+	"on-click-right": "mode",
+	"on-click-forward": "tz_up",
+	"on-click-backward": "tz_down",
+	"on-scroll-up": "shift_up",
+	"on-scroll-down": "shift_down"
+},
+
+"clock#2": {
+    //"format": " {:%I:%M %p}", // AM PM format
+    "format": "  {:%H:%M}", // 24H
+    "format-alt": "{:%A  |  %H:%M  |  %e %B}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+},
+
+"clock#3": {
+    //"format": "{:%I:%M %p - %d/%b}", //for AM/PM
+    "format": "{:%H:%M - %d/%b}", // 24H
+	"tooltip": false
+},
+
+"clock#4": {
+	"interval": 60,
+    //"format": "{:%B | %a %d, %Y | %I:%M %p}", // AM PM format
+    "format": "{:%B | %a %d, %Y | %H:%M}", // 24H
+	"format-alt": "{:%a %b %d, %G}",
+	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+},
+
+"clock#5": {
+    //"format": "{:%A, %I:%M %P}", // AM PM format
+    "format": "{:%a %d | %H:%M}", // 24H
+	"format-alt": "{:%A, %d %B, %Y (%R)}",
+	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+},
 
 "cpu": {
 	"format": "{usage}% 󰍛",
@@ -105,6 +162,29 @@
 		"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"
 	],
 	"on-click-right": "gnome-system-monitor",
+},
+
+"disk": {
+	"interval": 30,
+	//"format": "󰋊",
+	"path": "/",
+	//"format-alt-click": "click",
+	"format": "{percentage_used}% 󰋊",
+	//"tooltip": true,
+	"tooltip-format": "{used} used out of {total} on {path} ({percentage_used}%)",
+},
+
+"hyprland/language": {
+	"format": "Lang: {}",
+	"format-en": "US",
+	"format-tr": "Korea",
+	"keyboard-name": "at-translated-set-2-keyboard",
+	"on-click": "hyprctl switchxkblayout $SET_KB next"
+},
+
+"hyprland/submap": {
+	"format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+	"tooltip": false,
 },
 
 "hyprland/window": {
@@ -132,6 +212,19 @@
 	}
 },
 
+"keyboard-state": {
+	//"numlock": true,
+	"capslock": true,
+	"format": {
+		"numlock": "N {icon}",
+		"capslock": "󰪛 {icon}",
+	},
+	"format-icons": {
+		"locked": "",
+		"unlocked": ""
+	},
+},
+
 "memory": {
 	"interval": 10,
 	"format": "{used:0.1f}G 󰾆",
@@ -139,7 +232,74 @@
 	"format-alt-click": "click",
 	"tooltip": true,
 	"tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
-	"on-click-right": "kitty --title btop sh -c 'btop'"
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --btop"
+},
+
+"mpris": {
+	"interval": 10,
+	"format": "{player_icon} ",
+	"format-paused": "{status_icon} <i>{dynamic}</i>",
+	"on-click-middle": "playerctl play-pause",
+	"on-click": "playerctl previous",
+	"on-click-right": "playerctl next",
+	"scroll-step": 5.0,
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
+	"smooth-scrolling-threshold": 1,
+	"tooltip": true,
+	"tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
+	"player-icons": {
+		"chromium": "",
+		"default": "",
+		"firefox": "",
+		"kdeconnect": "",
+		"mopidy": "",
+		"mpv": "󰐹",
+		"spotify": "",
+		"vlc": "󰕼",
+	},
+	"status-icons": {
+		"paused": "󰐎",
+		"playing": "",
+		"stopped": "",
+	},
+	// "ignored-players": ["firefox"]
+	"max-length": 30,
+},
+
+"network": {
+	"format": "{ifname}",
+	"format-wifi": "{icon}",
+	"format-ethernet": "󰌘",
+	"format-disconnected": "󰌙",
+	"tooltip-format": "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}",
+	"format-linked": "󰈁 {ifname} (No IP)",
+	"tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+	"tooltip-format-ethernet": "{ifname} 󰌘",
+	"tooltip-format-disconnected": "󰌙 Disconnected",
+	"max-length": 30,
+	"format-icons": [
+		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
+	],
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nmtui"
+},
+
+"network#speed": {
+	"interval": 1,
+	"format": "{ifname}",
+	"format-wifi": "{icon}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+	"format-ethernet": "󰌘  {bandwidthUpBytes}  {bandwidthDownBytes}",
+	"format-disconnected": "󰌙",
+	"tooltip-format": "{ipaddr}",
+	"format-linked": "󰈁 {ifname} (No IP)",
+	"tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+	"tooltip-format-ethernet": "{ifname} 󰌘",
+	"tooltip-format-disconnected": "󰌙 Disconnected",
+	"min-length": 24,
+	"max-length": 24,
+	"format-icons": [
+		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
+	]
 },
 
 "power-profiles-daemon": {
@@ -181,107 +341,67 @@
 	"smooth-scrolling-threshold": 1,
 },
 
+"pulseaudio#1": {
+  "format": "{icon} {volume}%",
+  "format-bluetooth": "{icon} {volume}%",
+  "format-bluetooth-muted": " {icon}",
+  "format-muted": "󰸈",
+  "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+  "on-click": "pamixer --toggle-mute",
+  "on-click-right": "pavucontrol -t 3",
+  "tooltip": true,
+  "tooltip-format": "{icon} {desc} | {volume}%",
+},
+
+"pulseaudio#microphone": {
+	"format": "{format_source}",
+	"format-source": " {volume}%",
+	"format-source-muted": "",
+	"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle-mic",
+	"on-click-right": "pavucontrol -t 4",
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --mic-inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --mic-dec",
+	"tooltip-format": "{source_desc} | {source_volume}%",
+	"scroll-step": 5,
+},
+
 "tray": {
 	"icon-size": 20,
 	"spacing": 4,
 },
 
-"hyprland/workspaces#rw": {
-	"disable-scroll": true,
-	"all-outputs": true,
-	"warp-on-scroll": false,
-	"sort-by-number": true,
-	"show-special": false,
+"wireplumber": {
+	"format": "{icon} {volume} %",
+	"format-muted": " Mute",
+	"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
+	"on-click-right": "pavucontrol -t 3",
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
+	"format-icons": [
+		"", "", "󰕾", ""
+	],
+},
+
+"wlr/taskbar": {
+	"format": "{icon} {name}",
+	"icon-size": 16,
+	"all-outputs": false,
+	"tooltip-format": "{title}",
 	"on-click": "activate",
-	"on-scroll-up": "hyprctl dispatch workspace e+1",
-	"on-scroll-down": "hyprctl dispatch workspace e-1",
-	"persistent-workspaces": {
-		"*": 5
-	  },
-	"format": "{icon} {windows}",
-	"format-window-separator": " ",
-	"window-rewrite-default": " ",
-	"window-rewrite": {		
-		"title<.*amazon.*>": " ",
-		"title<.*reddit.*>": " ",
-
-		"class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>": " ",
-		"class<zen>": "󰰷 ",
-		"class<waterfox|waterfox-bin>": " ",
-		"class<microsoft-edge>": " ",
-		"class<Chromium|Thorium|[Cc]hrome>": " ",
-		"class<brave-browser>": "🦁 ",
-		"class<tor browser>": " ",
-		"class<firefox-developer-edition>": "🦊 ",
-
-		"class<kitty|konsole>": " ",
-		"class<kitty-dropterm>": " ",
-		"class<com.mitchellh.ghostty>": " ",
-		"class<org.wezfurlong.wezterm>": " ",
-
-		"class<[Tt]hunderbird|[Tt]hunderbird-esr>": " ",
-		"class<eu.betterbird.Betterbird>": " ",
-		"title<.*gmail.*>": "󰊫 ",
-
-		"class<[Tt]elegram-desktop|org.telegram.desktop|io.github.tdesktop_x64.TDesktop>": " ",
-		"class<discord|[Ww]ebcord|Vesktop>": " ",
-		"title<.*whatsapp.*>": " ",
-    "title<.*zapzap.*>": " ",
-		"title<.*messenger.*>": " ",
-		"title<.*facebook.*>": " ",
-		"title<.*reddit.*>": " ",
-
-
-		"title<.*ChatGPT.*>": "󰚩 ",
-		"title<.*deepseek.*>": "󰚩 ",
-		"title<.*qwen.*>": "󰚩 ",
-		"class<subl>": "󰅳 ",
-		"class<slack>": " ",
-
-		"class<mpv>": " ",
-		"class<celluloid|Zoom>": " ",
-		"class<Cider>": "󰎆 ",
-		"title<.*Picture-in-Picture.*>": " ",
-		"title<.*youtube.*>": " ",
-		"class<vlc>": "󰕼 ",
-		"title<.*cmus.*>": " ",
-		"class<[Ss]potify>": " ",
-
-		"class<virt-manager>": " ",
-		"class<.virt-manager-wrapped>": " ",
-		"class<virtualbox manager>": "💽 ",
-		"title<virtualbox>": "💽 ",
-		"class<remmina>": "🖥️ ",
-
-		"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "󰨞 ",
-    "class<dev.zed.Zed>": "󰵁",
-		"class<codeblocks>": "󰅩 ",
-		"title<.*github.*>": " ",
-		"class<mousepad>": " ",
-		"class<libreoffice-writer>": " ",
-		"class<libreoffice-startcenter>": "󰏆 ",
-		"class<libreoffice-calc>": " ",
-		"title<.*nvim ~.*>": " ",
-		"title<.*vim.*>": " ",
-		"title<.*nvim.*>": " ",
-		"title<.*figma.*>": " ",
-		"title<.*jira.*>": " ",
-		"class<jetbrains-idea>": " ",
-
-		"class<obs|com.obsproject.Studio>": " ",
-
-		"class<polkit-gnome-authentication-agent-1>": "󰒃 ",
-		"class<nwg-look>": " ",
-		"class<[Pp]avucontrol|org.pulseaudio.pavucontrol>": "󱡫 ",
-		"class<steam>": " ",
-		"class<thunar|nemo>": "󰝰 ",	
-    "class<Gparted>":"",
-		"class<gimp>": " ",
-		"class<emulator>": "📱 ",
-		"class<android-studio>": " ",
-		}
+	"on-click-middle": "close",
+	"ignore-list": [
+		"wofi",
+		"rofi",
+		"kitty",
+    "kitty-dropterm"
+		],
+},
 }
-
-}
-
-
