@@ -42,15 +42,18 @@ mkdir /mnt/efi
 mount $2 /mnt/efi
 
 rm -f /etc/pacman.d/mirrorlist
-echo "Server = https://mirror.morgan.kr/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+reflector -c "South Korea" > /etc/pacman.d/mirrorlist
 
 rm /etc/pacman.conf
 rm /mnt/etc/pacman.conf
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /etc
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /mnt/etc
 
-pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
+pacstrap -K /mnt base base-devel git linux linux-firmware linux-headers btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
+
+rm -f /mnt/etc/pacman.d/mirrorlist
+reflector -c "South Korea" > /mnt/etc/pacman.d/mirrorlist
 
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-system.sh /mnt
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-user.sh /mnt
