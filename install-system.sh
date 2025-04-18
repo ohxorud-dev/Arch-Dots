@@ -66,6 +66,10 @@ sudo systemctl enable sddm
 echo "### Changing Shell for root ###"
 chsh --shell /usr/bin/fish
 
+echo "### Add Zen Browser Policy ####"
+mkdir -p /etc/zen/policies/
+cp ~/.dotfiles/config/zen/policies.json /etc/zen/policies/policies.json
+
 echo "### Enforcing password in sudoers ###"
 rm -f /etc/sudoers.d/wheel
 echo "%wheel ALL=(ALL:ALL) ALL" >/etc/sudoers.d/wheel
