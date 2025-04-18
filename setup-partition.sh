@@ -48,6 +48,7 @@ pacstrap -K /mnt base base-devel linux linux-firmware linux-headers git btrfs-pr
 genfstab -U /mnt >>/mnt/etc/fstab
 
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-system.sh /mnt
+cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/install-user.sh /mnt
 arch-chroot /mnt bash /install-system.sh
 
 reboot
