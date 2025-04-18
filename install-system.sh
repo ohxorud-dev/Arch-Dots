@@ -46,9 +46,9 @@ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "### Setting grub-btrfsd ###"
-sudo sed -i 's#^ExecStart=.*#ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto#' /usr/lib/systemd/system/grub-btrfsd.service
-sudo systemctl daemon-reload
-sudo systemctl enable grub-btrfsd
+sed -i 's#^ExecStart=.*#ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto#' /usr/lib/systemd/system/grub-btrfsd.service
+systemctl daemon-reload
+systemctl enable grub-btrfsd
 
 echo "### Setting root password ###"
 set_user_password root
@@ -57,11 +57,11 @@ echo "### Adding new user ###"
 useradd -mG wheel ohxorud || echo "User already exist, using existing user"
 set_user_password ohxorud
 
-sudo -u bash /install-user.sh
+sudo -u ohxorud bash /install-user.sh
 
 echo "### Enabling essential services ###"
 systemctl enable NetworkManager
-sudo systemctl enable sddm
+systemctl enable sddm
 
 echo "### Changing Shell for root ###"
 chsh --shell /usr/bin/fish
