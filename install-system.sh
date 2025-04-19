@@ -47,7 +47,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "### Setting grub-btrfsd ###"
 sed -i 's#^ExecStart=.*#ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto#' /usr/lib/systemd/system/grub-btrfsd.service
-systemctl daemon-reload
 systemctl enable grub-btrfsd
 
 echo "### Setting root password ###"
