@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ "$#" -ne 2 ]; then
   echo "Partition names are not specified"
   echo "Usage: ./setup-partition.sh <BTRFS Partition> <EFI Partition>"
@@ -13,7 +11,7 @@ umount $1 || echo "$1 is not mounted"
 umount $2 || echo "$2 is not mounted"
 
 mkfs.btrfs --force $1
-mkfs.fat -F32 $2
+#mkfs.fat -F32 $2
 mount $1 /mnt
 
 btrfs subvolume create /mnt/@
@@ -45,14 +43,13 @@ rm -f /etc/pacman.d/mirrorlist
 reflector -c "South Korea" > /etc/pacman.d/mirrorlist
 
 rm /etc/pacman.conf
-rm /mnt/etc/pacman.conf
 cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /etc
-cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /mnt/etc
 
 pacman -Sy --needed archlinux-keyring
 pacstrap -K /mnt base base-devel git linux linux-firmware linux-headers btrfs-progs grub efibootmgr grub-btrfs timeshift vim neovim networkmanager reflector sudo
 genfstab -U /mnt >>/mnt/etc/fstab
 
+cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"/etc/pacman.conf /mnt/etc
 rm -f /mnt/etc/pacman.d/mirrorlist
 reflector -c "South Korea" > /mnt/etc/pacman.d/mirrorlist
 
