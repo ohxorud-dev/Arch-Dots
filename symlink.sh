@@ -56,6 +56,7 @@ link_config "config/waybar" "$HOME/.config/waybar" || echo "Failed to link wayba
 link_config "config/fcitx5/config" "$HOME/.config/fcitx5/config" || echo "Failed to link fcitx5 config."
 link_config "config/fcitx5/profile" "$HOME/.config/fcitx5/profile" || echo "Failed to link fcitx5 profile."
 link_config "config/fish/config.fish" "$HOME/.config/fish/config.fish" || echo "Failed to link fish config file."
+link_config "config/swaync" "$HOME/.config/swaync" || echo "Failed to link swaync config file."
 
 link_config "etc/pacman.conf" "/etc/pacman.conf" true || echo "Failed to link pacman.conf."
 
