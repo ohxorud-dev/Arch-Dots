@@ -15,7 +15,7 @@ echo "### Symlinking ###"
 bash /home/ohxorud/.dotfiles/symlink.sh
 
 echo "### Installing display graphics for nvidia and intel GPU ###"
-sudo -u ohxorud sudo -u ohxorud yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
+yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
 
 echo "### Changing Shell for ohxorud ###"
 chsh --shell /usr/bin/fish
