@@ -5,3 +5,4 @@ end
 starship init fish | source
 
 alias waybar-reload="killall waybar; nohup waybar &"
+alias l="ls -al"

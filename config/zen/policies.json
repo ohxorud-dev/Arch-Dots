@@ -26,25 +26,32 @@
         "installation_mode": "normal_installed"
       },
       "jid1-KKzOGWgsW3Ao4Q@jetpack": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jid1-KKzOGWgsW3Ao4Q@jetpack/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jid1-KKzOGWgsW3Ao4Q@jetpack/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "jid1-MnnxcxisBPnSXQ@jetpack": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jid1-MnnxcxisBPnSXQ@jetpack/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jid1-MnnxcxisBPnSXQ@jetpack/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "sponsorBlocker@ajay.app": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sponsorBlocker@ajay.app/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sponsorBlocker@ajay.app/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "uBlock0@raymondhill.net": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "{74145f27-f039-47ce-a470-a662b129930a}": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{74145f27-f039-47ce-a470-a662b129930a}/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{74145f27-f039-47ce-a470-a662b129930a}/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "{762f9885-5a13-4abd-9c77-433dcd38b8fd}": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{762f9885-5a13-4abd-9c77-433dcd38b8fd}/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{762f9885-5a13-4abd-9c77-433dcd38b8fd}/latest.xpi",
+        "installation_mode": "normal_installed"
       },
       "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}": {
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}/latest.xpi",
+        "installation_mode": "normal_installed"
       }
     },
     "NetworkPrediction": false,

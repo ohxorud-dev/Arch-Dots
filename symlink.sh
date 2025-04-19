@@ -16,14 +16,11 @@ link_config() {
     cmd_prefix="sudo "
   fi
 
-  # 1. Ensure target parent directory exists
   if [ ! -d "$(dirname "$target")" ]; then
     echo "Creating target parent directory: $(dirname "$target")"
     ${cmd_prefix}mkdir -p "$(dirname "$target")"
   fi
 
-  # 2. Check if source exists in dotfiles. If not, copy from target.
-  #    Use -e to check if the path exists (file or directory)
   if [ ! -e "$source" ]; then
     if [ ! -d "$(dirname "$source")" ]; then
       echo "Creating source parent directory: $(dirname "$source")"
@@ -57,7 +54,12 @@ link_config "config/fcitx5/config" "$HOME/.config/fcitx5/config" || echo "Failed
 link_config "config/fcitx5/profile" "$HOME/.config/fcitx5/profile" || echo "Failed to link fcitx5 profile."
 link_config "config/fish/config.fish" "$HOME/.config/fish/config.fish" || echo "Failed to link fish config file."
 link_config "config/swaync" "$HOME/.config/swaync" || echo "Failed to link swaync config file."
+link_config "config/.pam_environment" "$HOME/.pam_environment" || echo "Failed to link pam_environment file."
+
 
 link_config "etc/pacman.conf" "/etc/pacman.conf" true || echo "Failed to link pacman.conf."
+link_config "etc/security/pam_env.conf" "/etc/security/pam_env.conf" true || echo "Failed to link pam_env.conf."
+link_config "etc/environment" "/etc/environment" true || echo "Failed to link environment file."
+
 
 echo "### Symlinking complete! ###"
