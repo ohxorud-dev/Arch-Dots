@@ -17,5 +17,8 @@ bash /home/ohxorud/.dotfiles/symlink.sh
 echo "### Installing display graphics for nvidia and intel GPU ###"
 yay -S --noconfirm --needed nvidia nvidia-utils mesa vulkan-intel
 
+echo "### Downloading wallpaper ###"
+curl https://hyprland.org/imgs/blog/contestWinners/end_4.png --output ~/.config/wallpaper.png
+
 echo "### Changing Shell for ohxorud ###"
 chsh --shell /usr/bin/fish
